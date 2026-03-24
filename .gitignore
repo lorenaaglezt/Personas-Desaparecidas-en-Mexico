@@ -1,0 +1,30 @@
+# Quarto outputs
+_site/
+_freeze/
+/.quarto/
+*.html         # opcional: si no quieres subir el HTML generado
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv/
+env/
+
+# Jupyter residuals
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+```
+
+## El `requirements.txt` (Python)
+```
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+plotly
+jupyter
