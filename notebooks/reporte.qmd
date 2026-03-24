@@ -25,7 +25,12 @@ Creación del dataframe a partir del csv "tot_reg_desap.csv"
 ```{python}
 import pandas as pd
 
-df = pd.read_csv('tot_reg_desap.csv')
+df = pd.read_csv(
+    "tot_reg_desap.csv",
+    index_col=0,
+    keep_default_na=False,
+    na_values=["NA", "N/A", "", " "],
+)
 ```
 
 ## Descripción del dataset
@@ -58,18 +63,7 @@ df.info()
 
 # Limpieza del dataset: Documentación
 
-```{python}
-df_raw = pd.read_csv(
-    "tot_reg_desap.csv",
-    index_col=0,
-    keep_default_na=False,
-    na_values=["NA", "N/A", "", " "],
-)
- 
-df_limpieza = df_raw.copy()
-```
-
-## 1. Valores faltantes
+## Valores faltantes
 
 Revisamos los datos faltantes por cada columna:
 
@@ -87,21 +81,11 @@ print(resumen)
 
 Encontramos que las siguientes columnas son las que presentan espacios nulos en distintos procentajes: estatus_busqueda, fub, DC_id, fecha_desap.
 
-### Columna *estatus_busqueda*
+### Información faltante: *estatus_busqueda*
 
 Un dato faltante en esta columna significa que para una persona desaparecida registrada no se sabe si ya fue localizada, si no se cuenta con ningún indicio de la persona o si está en proceso de búsqueda.
 
 La cantidad de datos faltantes en esta columna representa el 30.5% (27,364 registros), lo que significa que para el 30.5% de las personas registradas como desaparecidas se desconoce el estatus de su búsqueda. Eliminar los registros que no cuentan con este dato significa descartar la información de personas desaparecidas, esto crea un sesgo en el análisis de las cifras porque estaríamos descartando más de 27 mil registros que puede que cuenten con los datos de las otras columnas y nos puede proporcionar información útil respecto al tema.
-
-Para proceder con esta falta de información, en lugar de eliminar las filas con este dato vacío, de decidió rellenar con el nuevo estado "Sin estatus encontrado", con lo que podemos seguir contando con la otra información sin necesidad de eliminarlo y conservamos la información registrada para cada persona.
-
-```{python}
-df_limpieza["estatus_busqueda"] = df_limpieza["estatus_busqueda"].fillna("Sin estatus registrado")
-```
-
-Ahora consideramos la información completa pero contando con 27,364 registros de personas desaparecidas de las que no se sabe su estatus de búsqueda.
-
-### Columna *fub*
 
 # Hallazgos
 
