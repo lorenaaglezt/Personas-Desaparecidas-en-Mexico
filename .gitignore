@@ -2,7 +2,13 @@
 _site/
 _freeze/
 /.quarto/
-*.html         # opcional: si no quieres subir el HTML generado
+*.html
+
+# Archivos intermedios de Quarto
+*_files/
+*.quarto_ipynb
+.quarto/
+_freeze/
 
 # Python
 __pycache__/
